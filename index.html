@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jason 'Nassim' Todd</title>
+    <style>
+        body {
+            background-color: pink; /* Fond rose */
+            color: white;
+            font-family: 'Press Start 2P', cursive; /* Police pixel */
+            text-align: center;
+            padding: 100px;
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            color: pink; /* Texte rose */
+            background-color: white;
+            border: 2px solid pink;
+            cursor: pointer;
+        }
+        input {
+            padding: 5px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"> <!-- Lien vers la police de caractères Pixel -->
+</head>
+<body>
+
+    <div id="message">
+        <p>Salut Mey, pour accéder à ton cadeau trouve le MDP avec la phrase suivante :<br>
+        "Deux bâtons et trois pierres".</p>
+        <input type="text" id="codeInput" placeholder="Réponse">
+        <button id="submitCode" onclick="verifierCode()">Valider</button>
+    </div>
+
+    <div id="questions" class="hidden">
+        <p>Bien, vu que j'ai galéré à coder ce bourbier, tu vas galérer à mes questions, OK ?</p>
+        <button id="startQuestions" onclick="demarrerQuestions()">OK</button>
+    </div>
+
+    <div id="rickroll-link" class="hidden">
+        <p>me remercie pas :</p>
+        <p><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">^^</a></p>
+    </div>
+
+    <script>
+        function verifierCode() {
+            var reponse = document.getElementById('codeInput').value.toLowerCase();
+            if (reponse === 'pioche') {
+                document.getElementById('message').classList.add('hidden');
+                document.getElementById('questions').classList.remove('hidden');
+            } else {
+                alert('Réponse incorrecte. Essaye encore.');
+            }
+        }
+
+        function demarrerQuestions() {
+            document.getElementById('questions').classList.add('hidden');
+            poserQuestion("Quelle est la 17ème musique que j'ai partagée pendant le '30 days songs challenge' ?", "To Zion");
+        }
+
+        function poserQuestion(question, reponseAttendue) {
+            var reponseUtilisateur = prompt(question);
+            if (reponseUtilisateur !== null) {
+                if (reponseUtilisateur.toLowerCase() === reponseAttendue.toLowerCase()) {
+                    alert('Bonne réponse !');
+                    if (question === "Quelle est la 17ème musique que j'ai partagée pendant le '30 days songs challenge' ?") {
+                        poserQuestion("Converti '1010' en base 10.", "10");
+                    } else if (question === "Converti '1010' en base 10.") {
+                        poserQuestion("Quelle phrase j'ai écrite ici : 6 33 999 22 444 777 44 3 2 999 ?", "mey birthday");
+                    } else {
+                        afficherCadeau();
+                    }
+                } else {
+                    alert('Mauvaise réponse. Réessaie.');
+                    poserQuestion(question, reponseAttendue);
+                }
+            }
+        }
+
+        function afficherCadeau() {
+            document.getElementById('rickroll-link').classList.remove('hidden');
+            alert('gg, bon anniversaire');
+        }
+    </script>
+
+</body>
+</html>
